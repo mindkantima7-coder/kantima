@@ -1,115 +1,463 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--
-GitHub Profile README
-Replace the placeholders with your real information.
-Remove technologies you have not used yet.
--->
+  <title>My Profile | Personal Portfolio</title>
+  <meta name="description" content="เว็บไซต์แนะนำตัวและแสดงผลงานของฉัน">
 
-<div align="center">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-# Hello, I'm Your Name 👋
+    :root {
+      --primary: #6366f1;
+      --secondary: #06b6d4;
+      --bg: #080d1b;
+      --card: rgba(19, 28, 51, 0.82);
+      --text: #f1f5f9;
+      --muted: #a5b4cc;
+    }
 
-### Full-stack Developer | นักพัฒนาเว็บแอปพลิเคชัน
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-Building reliable, user-friendly, and meaningful digital experiences.
+    html {
+      scroll-behavior: smooth;
+    }
 
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/YOUR_USERNAME)
-[![Profile Views](https://komarev.com/ghpvc/?username=YOUR_USERNAME&style=for-the-badge&color=0969da&label=PROFILE+VIEWS)](https://github.com/YOUR_USERNAME)
+    body {
+      font-family: 'Kanit', 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-</div>
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 15% 15%,
+          rgba(99,102,241,.23), transparent 42%),
+        radial-gradient(ellipse at 85% 70%,
+          rgba(6,182,212,.15), transparent 40%);
+    }
 
----
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-## 👨‍💻 About Me | เกี่ยวกับฉัน
+    .navbar {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-**EN**
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
 
-I'm a Full-stack Developer interested in building modern web
-applications, writing maintainable code, and solving practical
-problems through technology.
+    .logo span {
+      color: var(--secondary);
+    }
 
-I believe in continuous learning, thoughtful design, and building
-software that delivers real value.
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-**TH**
+    .nav-links a:hover {
+      color: white;
+    }
 
-ผมสนใจการพัฒนาเว็บแอปพลิเคชันทั้ง Frontend และ Backend
-ให้ความสำคัญกับคุณภาพของโค้ด การออกแบบที่ใช้งานง่าย
-และการนำเทคโนโลยีมาแก้ปัญหาในชีวิตจริง
+    .container {
+      width: min(900px, calc(100% - 32px));
+      margin: 55px auto 70px;
+    }
 
-ผมเชื่อในการเรียนรู้อย่างต่อเนื่อง การพัฒนาทักษะ
-และการสร้างผลงานที่มีคุณค่า
+    .profile-card {
+      position: relative;
+      padding: 48px 30px;
+      text-align: center;
+      border: 1px solid rgba(148,163,184,.2);
+      border-radius: 28px;
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 25px 80px rgba(0,0,0,.25);
+      animation: appear .8s ease both;
+    }
 
-## 🛠️ Tech Stack
+    .profile-image {
+      width: 145px;
+      height: 145px;
+      margin: 0 auto 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      padding: 5px;
+      background: linear-gradient(135deg,
+        var(--primary), var(--secondary));
+      box-shadow: 0 0 35px rgba(99,102,241,.28);
+    }
 
-> Keep only the technologies you actually use or are learning.
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      background: #182238;
+    }
 
-### Frontend
+    .tag {
+      display: inline-block;
+      padding: 6px 15px;
+      margin-bottom: 18px;
+      border-radius: 50px;
+      border: 1px solid rgba(6,182,212,.35);
+      background: rgba(6,182,212,.08);
+      color: #67e8f9;
+      font-size: 13px;
+    }
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+    h1 {
+      font-size: clamp(30px, 5vw, 45px);
+      line-height: 1.35;
+      font-weight: 600;
+    }
 
-### Backend
+    h1 span {
+      background: linear-gradient(90deg,
+        #818cf8, #22d3ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+    .subtitle {
+      margin-top: 10px;
+      color: var(--secondary);
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      letter-spacing: .5px;
+    }
 
-### Database & Tools
+    .description {
+      max-width: 600px;
+      margin: 22px auto 28px;
+      color: var(--muted);
+      line-height: 2;
+      font-size: 15px;
+    }
 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
+    .buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
 
-## 🚀 Featured Projects | ผลงานเด่น
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      min-width: 145px;
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: .25s ease;
+    }
 
-<!-- Replace these examples with your actual repositories. -->
+    .btn-primary {
+      background: linear-gradient(110deg,
+        var(--primary), #4f46e5);
+      color: white;
+      box-shadow: 0 8px 24px rgba(99,102,241,.2);
+    }
 
-### 1. Project Name
+    .btn-outline {
+      border: 1px solid rgba(148,163,184,.3);
+      background: rgba(255,255,255,.03);
+    }
 
-A short description of the problem this project solves.
+    .btn:hover {
+      transform: translateY(-3px);
+      filter: brightness(1.15);
+    }
 
-- **Features:** Describe the main features.
-- **Tech:** List the technologies actually used.
-- **Repository:** [View Project](https://github.com/YOUR_USERNAME/REPOSITORY_NAME)
-- **Live Demo:** Add a real deployment URL if available.
+    .section {
+      margin-top: 26px;
+      padding: 30px;
+      border: 1px solid rgba(148,163,184,.15);
+      border-radius: 22px;
+      background: var(--card);
+      animation: appear .8s ease both;
+    }
 
-### 2. Project Name
+    .section-title {
+      margin-bottom: 20px;
+      font-size: 21px;
+      font-weight: 500;
+    }
 
-A web application built to improve a workflow or solve a
-specific problem.
+    .section-title span {
+      color: var(--secondary);
+    }
 
-- **Features:** Describe what makes this project useful.
-- **Tech:** List the actual technologies used.
-- **Repository:** [View Project](https://github.com/YOUR_USERNAME/REPOSITORY_NAME)
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-## 🎯 Current Focus | สิ่งที่กำลังพัฒนา
+    .skill {
+      padding: 8px 15px;
+      border-radius: 10px;
+      background: rgba(99,102,241,.1);
+      border: 1px solid rgba(99,102,241,.22);
+      color: #c7d2fe;
+      font-size: 13px;
+    }
 
-- Building full-stack web applications
-- Improving software architecture and code quality
-- Learning about application security and performance
-- Exploring new tools and development workflows
+    .project {
+      padding: 18px;
+      border: 1px solid rgba(148,163,184,.15);
+      border-radius: 14px;
+      background: rgba(255,255,255,.025);
+    }
 
-## 🤝 Let's Connect | ติดต่อ
+    .project h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
 
-I'm open to meaningful collaborations, knowledge sharing,
-and interesting software projects.
+    .project p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.8;
+    }
 
-- **GitHub:** [@YOUR_USERNAME](https://github.com/YOUR_USERNAME)
-- **Portfolio:** Add your portfolio URL
-- **LinkedIn:** Add your LinkedIn URL
-- **Email:** Add your professional email
+    .project a {
+      display: inline-block;
+      margin-top: 12px;
+      color: #67e8f9;
+      font-size: 13px;
+    }
 
----
+    .footer {
+      padding: 30px 15px;
+      text-align: center;
+      color: #718096;
+      font-size: 13px;
+    }
 
-<div align="center">
+    .footer span {
+      color: #818cf8;
+    }
 
-*Build with purpose. Learn continuously. Improve every day.*
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-**สร้างด้วยเป้าหมาย เรียนรู้อย่างต่อเนื่อง และพัฒนาทุกวัน**
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 20px 16px;
+      }
 
-</div>
+      .nav-links {
+        gap: 12px;
+        font-size: 12px;
+      }
+
+      .container {
+        margin-top: 28px;
+      }
+
+      .profile-card {
+        padding: 38px 20px;
+      }
+
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+
+      .section {
+        padding: 23px 19px;
+      }
+
+      .description {
+        font-size: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <a href="#" class="logo">MY<span>PROFILE.</span></a>
+
+    <ul class="nav-links">
+      <li><a href="#about">เกี่ยวกับฉัน</a></li>
+      <li><a href="#skills">ทักษะ</a></li>
+      <li><a href="#projects">ผลงาน</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <!-- PROFILE -->
+    <section class="profile-card" id="about">
+
+      <div class="profile-image">
+        <img
+          src="https://placehold.co/300x300/182238/67e8f9?text=ME"
+          alt="รูปโปรไฟล์"
+        >
+      </div>
+
+      <div class="tag">✦ WELCOME TO MY WEBSITE ✦</div>
+
+      <h1>สวัสดีครับ ผม <span>ชื่อของคุณ</span></h1>
+
+      <p class="subtitle">
+        Full-stack Developer | Web Designer
+      </p>
+
+      <p class="description">
+        ยินดีต้อนรับเข้าสู่เว็บไซต์ส่วนตัวของผมครับ 👋<br>
+        ผมสนใจการพัฒนาเว็บไซต์ การออกแบบ และเทคโนโลยีใหม่ ๆ
+        พร้อมเรียนรู้และพัฒนาทักษะเพื่อสร้างผลงานที่มีคุณภาพ<br>
+        <br>
+        Welcome to my personal portfolio.
+        I enjoy building websites, exploring technology,
+        and creating meaningful digital experiences.
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn-primary"
+           href="https://github.com/YOUR_USERNAME"
+           target="_blank"
+           rel="noopener noreferrer">
+          GitHub ↗
+        </a>
+
+        <a class="btn btn-outline" href="#contact">
+          ติดต่อฉัน ✉
+        </a>
+      </div>
+
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <h2 class="section-title">
+        <span>01.</span> Skills | ทักษะ
+      </h2>
+
+      <div class="skills">
+        <span class="skill">HTML5</span>
+        <span class="skill">CSS3</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">Responsive Design</span>
+        <span class="skill">Git & GitHub</span>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <h2 class="section-title">
+        <span>02.</span> My Projects | ผลงานของฉัน
+      </h2>
+
+      <article class="project">
+        <h3>🌐 Personal Portfolio</h3>
+
+        <p>
+          เว็บไซต์แนะนำตัวที่รวบรวมข้อมูล ทักษะ
+          และผลงานไว้ในที่เดียว
+        </p>
+
+        <a href="https://github.com/YOUR_USERNAME"
+           target="_blank"
+           rel="noopener noreferrer">
+          ดู GitHub ของฉัน →
+        </a>
+      </article>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <h2 class="section-title">
+        <span>03.</span> Contact | ติดต่อ
+      </h2>
+
+      <p class="description" style="margin:0 0 20px;">
+        ขอบคุณที่เข้ามาเยี่ยมชมเว็บไซต์ของผม
+        หากสนใจพูดคุยหรือร่วมงาน สามารถติดต่อได้ตามช่องทางด้านล่าง
+      </p>
+
+      <div class="buttons">
+        <a class="btn btn-primary"
+           href="mailto:YOUR_EMAIL@example.com">
+          ส่งอีเมล ✉
+        </a>
+
+        <a class="btn btn-outline"
+           href="https://github.com/YOUR_USERNAME"
+           target="_blank"
+           rel="noopener noreferrer">
+          GitHub ↗
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    Designed & Built with <span>♥</span> by ชื่อของคุณ
+    <br>
+    © <span id="year"></span> My Profile. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
+</body>
+</html>
